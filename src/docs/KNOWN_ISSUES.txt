@@ -1,0 +1,11 @@
+Known issues:
+  - borders/padding between items really mess things up.
+  - there's still a few places where horizontal/vertical checks could
+    be moved from point-of-execution into the initialization via
+    various ugly tricks (binding a different mousemove function
+    depending on orientation for example), if you want to get really
+    picky about optimizing for speed.
+  - XHTML namespace extension bits probably don't play nice in HTML4.
+  - ought to wrap the prototype calls in a wrapper to make it easier
+    for people to rewrite for a different toolkit, or their own code.
+  - no keyboard equivilent for the mouseover fun.
