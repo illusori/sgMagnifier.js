@@ -2,7 +2,7 @@
  *  Produces a "magnifier bar" where the element under the mouse
  *  is magnified as you scroll around the bar.  Very Cute.
  *
- *  Requires (but doesn't check for) prototype 1.4.0. (http://prototypejs.org/)
+ *  Requires (but doesn't check for) prototype 1.6. (http://prototypejs.org/)
  *  May work with earlier or later versions, up to you to test. :)
  *
  *  Copyright 2006-2007 Sam Graham.  http://www.illusori.co.uk/
@@ -74,7 +74,7 @@ Magnifier.prototype = {
             this.initialX = pos[ 0 ];
             this.initialY = pos[ 1 ];
 
-            pos = Element.getDimensions( this.bar );
+            pos = $(this.bar).getDimensions();
             this.initialWidth  = pos.width;
             this.initialHeight = pos.height;
 
@@ -91,21 +91,21 @@ Magnifier.prototype = {
              *  containing our rescaled items.
              */
             this.holdingDiv = document.createElement( 'div' );
-            Element.setStyle( this.holdingDiv,
-                $H( {
+            $(this.holdingDiv).setStyle(
+                {
                     width:    this.initialWidth + 'px',
                     height:   this.initialHeight + 'px'
-                    } ) );
+                } );
 
             this.slidingDiv = document.createElement( 'div' );
-            Element.setStyle( this.slidingDiv,
-                $H( {
+            $(this.slidingDiv).setStyle(
+                {
                     position: 'absolute',
                     width:    this.initialWidth + 'px',
                     height:   this.initialHeight + 'px',
                     left:     this.initialX + 'px',
                     top:      this.initialY + 'px'
-                    } ) );
+                } );
 
             while( this.bar.firstChild )
                 this.slidingDiv.appendChild( this.bar.firstChild );
@@ -165,8 +165,7 @@ Magnifier.prototype = {
 
             this.items = new Array();
 
-            els = document.getElementsByClassName( 'magnifier-item',
-                this.bar );
+            els = $(this.bar).select( '.magnifier-item' );
             for( i = 0; i < els.length; i++ )
             {
                 var pos, item;
@@ -201,15 +200,15 @@ Magnifier.prototype = {
     slide: function( offset )
         {
             if( this.orientation == 'horizontal' )
-                Element.setStyle( this.slidingDiv,
-                    $H( {
+                $(this.slidingDiv).setStyle(
+                    {
                         left: ( this.initialX + offset ) + 'px'
-                        } ) );
+                    } );
             else
-                Element.setStyle( this.slidingDiv,
-                    $H( {
+               $(this.slidingDiv).setStyle(
+                    {
                         top: ( this.initialY + offset ) + 'px'
-                        } ) );
+                    } );
         },
 
     resetMagnifier: function()
@@ -340,7 +339,7 @@ function scanForMagnifiers()
 {
     var i, els;
 
-    els = document.getElementsByClassName( 'magnifier-bar' );
+    els = $$('.magnifier-bar');
     for( i = 0; i < els.length; i++ )
         new Magnifier( els[ i ] );
 }
