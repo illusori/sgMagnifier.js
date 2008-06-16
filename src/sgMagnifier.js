@@ -344,4 +344,4 @@ function scanForMagnifiers()
         new Magnifier( els[ i ] );
 }
 
-Event.observe( window, 'load', scanForMagnifiers, false );
+Event.observe( window, 'dom:loaded', scanForMagnifiers, false );
