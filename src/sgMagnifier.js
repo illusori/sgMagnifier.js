@@ -1,4 +1,4 @@
-/*  Magnifier class.
+/*  Magnifier class.  Version 1.0.0.0.
  *  Produces a "magnifier bar" where the element under the mouse
  *  is magnified as you scroll around the bar.  Very Cute.
  *
