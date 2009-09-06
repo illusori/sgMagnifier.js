@@ -36,6 +36,8 @@ Magnifier = Class.create();
 
 Magnifier.prototype = {
 
+    Version: '1.0.0.0',
+
     defaults: {
         orientation:    'horizontal',
         scalingmax:     300,
@@ -344,4 +346,7 @@ function scanForMagnifiers()
         new Magnifier( els[ i ] );
 }
 
-Event.observe( window, 'dom:loaded', scanForMagnifiers, false );
+if( document.loaded )
+    scanForMagnifiers();
+else
+    Event.observe( document, 'dom:loaded', scanForMagnifiers, false );
