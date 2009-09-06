@@ -81,9 +81,17 @@ Magnifier.prototype = {
             this.initialHeight = pos.height;
 
             if( this.orientation == 'horizontal' )
-                this.size = this.initialWidth;
+            {
+                this.size       = this.initialWidth;
+                this.slide      = this._slideHorizontal;
+                this._mouseMove = this._mouseMoveHorizontal;
+            }
             else
-                this.size = this.initialHeight;
+            {
+                this.size       = this.initialHeight;
+                this.slide      = this._slideVertical;
+                this._mouseMove = this._mouseMoveVertical;
+            }
 
             /*  This is nasty...
              *  So that we don't screw with the styles on their div
@@ -199,18 +207,20 @@ Magnifier.prototype = {
             //    already over it?
         },
 
-    slide: function( offset )
+    _slideHorizontal: function( offset )
         {
-            if( this.orientation == 'horizontal' )
-                $(this.slidingDiv).setStyle(
-                    {
-                        left: ( this.initialX + offset ) + 'px'
-                    } );
-            else
-               $(this.slidingDiv).setStyle(
-                    {
-                        top: ( this.initialY + offset ) + 'px'
-                    } );
+            $(this.slidingDiv).setStyle(
+                {
+                    left: ( this.initialX + offset ) + 'px'
+                } );
+        },
+
+    _slideVertical: function( offset )
+        {
+           $(this.slidingDiv).setStyle(
+                {
+                    top: ( this.initialY + offset ) + 'px'
+                } );
         },
 
     resetMagnifier: function()
@@ -229,6 +239,8 @@ Magnifier.prototype = {
                 this.resetMagnifier();
                 return;
             }
+
+/*  TODO: cache pos, no redraw if mouse move was orthogonal to bar!  */
 
             i = 0;
             while( i < this.items.length && pos > this.items[ i ].end )
@@ -327,12 +339,14 @@ Magnifier.prototype = {
             this.stopWatching();
         },
 
-    _mouseMove: function( e )
+    _mouseMoveHorizontal: function( e )
         {
-            if( this.orientation == 'horizontal' )
-                this.redrawMagnifier( Event.pointerX( e ) - this.initialX );
-            else
-                this.redrawMagnifier( Event.pointerY( e ) - this.initialY );
+            this.redrawMagnifier( Event.pointerX( e ) - this.initialX );
+        },
+
+    _mouseMoveVertical: function( e )
+        {
+            this.redrawMagnifier( Event.pointerY( e ) - this.initialY );
         }
 
     };
