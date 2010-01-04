@@ -5,7 +5,7 @@
  *  Requires (but doesn't check for) prototype 1.6. (http://prototypejs.org/)
  *  May work with earlier or later versions, up to you to test. :)
  *
- *  Copyright 2006-2007 Sam Graham.  http://www.illusori.co.uk/
+ *  Copyright 2006-2010 Sam Graham.  http://www.illusori.co.uk/
  *  This work is licensed under a
  *  Creative Commons Attribution-Share Alike 2.0 UK: England & Wales License
  *  http://creativecommons.org/licenses/by-sa/2.0/uk/
